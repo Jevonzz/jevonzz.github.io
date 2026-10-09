@@ -12,16 +12,18 @@ export default function Projects() {
   return (
     <section id="work" className="section">
       <SectionHeader eyebrow="Selected work" title="Things I've built">
-        A mix of full-stack apps and front-end experiments. Every project is open source, so feel free to dig into the code.
+        A mix of full-stack apps and front-end experiments. Professional work up front, followed by open-source projects you can dig into on GitHub.
       </SectionHeader>
 
       <div className="mt-12 grid gap-5 md:grid-cols-2">
-        {featuredProjects.map((p, i) => (
-          <a
+        {featuredProjects.map((p, i) => {
+          // Client work without a public repo renders as a plain card.
+          const Card = p.link ? 'a' : 'article'
+          const linkProps = p.link ? { href: p.link, target: '_blank', rel: 'noreferrer' } : {}
+          return (
+          <Card
             key={p.name}
-            href={p.link}
-            target="_blank"
-            rel="noreferrer"
+            {...linkProps}
             onMouseMove={trackSpotlight}
             className="card spotlight reveal group flex flex-col p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/50 sm:p-8"
             style={{ '--delay': `${(i % 2) * 90}ms` }}
@@ -32,7 +34,7 @@ export default function Projects() {
                   <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
                   <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
                   <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-                  <span className="ml-3 truncate font-mono text-[11px] text-muted">github.com/Jevonzz/{p.link.split('/').pop()}</span>
+                  <span className="ml-3 truncate font-mono text-[11px] text-muted">{p.link ? `github.com/Jevonzz/${p.link.split('/').pop()}` : 'Professional work'}</span>
                 </div>
                 <div className="space-y-2 p-4 font-mono text-xs leading-relaxed">
                   <p><span className="text-accent">const</span> project = <span className="text-accent2">'{p.name}'</span></p>
@@ -48,7 +50,7 @@ export default function Projects() {
             <p className="text-xs font-semibold uppercase tracking-widest text-accent">{p.kind}</p>
             <h3 className="mt-2 flex items-center justify-between font-display text-xl font-semibold">
               {p.name}
-              <ArrowUpRight className="text-muted transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink" />
+              {p.link && <ArrowUpRight className="text-muted transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink" />}
             </h3>
             <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{p.description}</p>
             <ul className="mt-5 flex flex-wrap gap-2" aria-label="Technologies">
@@ -56,8 +58,9 @@ export default function Projects() {
                 <li key={t} className="chip">{t}</li>
               ))}
             </ul>
-          </a>
-        ))}
+          </Card>
+          )
+        })}
       </div>
 
       <div className="reveal mt-14">

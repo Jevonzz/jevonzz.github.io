@@ -12,8 +12,8 @@ export const profile = {
 }
 
 export const about = [
-  "I'm a senior frontend developer at Summit Trade & Resources, building web and mobile products with React, TypeScript and React Native.",
-  "Before that I spent a year and a half at SNSoft shipping features across web and mobile apps and building product analytics with PostHog. Earlier I optimised WordPress sites for SEO and built React and Tailwind apps with cross-functional teams. I care about interfaces that feel fast, look sharp and work for everyone.",
+  "I'm a senior frontend developer at Summit Trade & Resources, building web products with Next.js, React and TypeScript.",
+  "Before that I spent a year and a half at SNSoft building web and React Native mobile apps, including Baiki, and setting up product analytics with PostHog. Earlier I optimised WordPress sites for SEO and built React and Tailwind apps with cross-functional teams. I care about interfaces that feel fast, look sharp and work for everyone.",
 ]
 
 export const highlights = [
@@ -30,9 +30,9 @@ export const experiences = [
     logo: '',
     date: 'Aug 2026 – Present',
     points: [
-      'Leading frontend development for web and mobile products with React, TypeScript and React Native.',
+      'Leading frontend development of web products with Next.js, React and TypeScript.',
     ],
-    tags: ['React', 'TypeScript', 'React Native'],
+    tags: ['Next.js', 'React', 'TypeScript'],
   },
   {
     title: 'Frontend Developer',
@@ -40,12 +40,12 @@ export const experiences = [
     logo: '/logos/snsoft.jpg',
     date: 'Jan 2025 – Aug 2026',
     points: [
-      'Built and maintained frontend features in React, TypeScript and Flutter across web and mobile apps, including Baiki.',
+      'Built and maintained web and mobile apps with React, TypeScript and React Native, including the Baiki app.',
       'Integrated PostHog to track click and page-view events across the product.',
       'Extended PostHog with XHR-based event tracking for more accurate, flexible analytics.',
       'Debugged and fixed issues across web and mobile to keep the experience smooth and fast.',
     ],
-    tags: ['React', 'TypeScript', 'Flutter', 'PostHog'],
+    tags: ['React', 'React Native', 'TypeScript', 'PostHog'],
   },
   {
     title: 'Web Developer (SEO)',
@@ -88,6 +88,15 @@ export const experiences = [
 
 export const featuredProjects = [
   {
+    name: 'Baiki',
+    kind: 'Mobile app · SNSoft',
+    description:
+      'A production mobile app I built and maintained at SNSoft, with PostHog analytics tracking how people use it.',
+    tags: ['React Native', 'TypeScript', 'PostHog'],
+    link: '',
+    hue: 'from-violet-500/30 to-cyan-500/30',
+  },
+  {
     name: 'Car Service Maintenance',
     kind: 'Mobile app',
     description:
@@ -114,18 +123,10 @@ export const featuredProjects = [
     link: 'https://github.com/Jevonzz/e-commerce',
     hue: 'from-amber-500/30 to-rose-500/30',
   },
-  {
-    name: 'Apple iPhone Page',
-    kind: '3D & motion',
-    description:
-      'A recreation of the iPhone product page with scroll-driven GSAP animation and an interactive three.js model.',
-    tags: ['React', 'GSAP', 'three.js'],
-    link: 'https://github.com/Jevonzz/apple-web',
-    hue: 'from-emerald-500/30 to-cyan-500/30',
-  },
 ]
 
 export const learningProjects = [
+  { name: 'Apple iPhone Page', tags: ['React', 'GSAP', 'three.js'], link: 'https://github.com/Jevonzz/apple-web' },
   { name: 'Movie Web App', tags: ['React', 'REST API'], link: 'https://github.com/Jevonzz/Movie-Web-Application' },
   { name: 'HooBank', tags: ['React', 'Tailwind CSS'], link: 'https://github.com/Jevonzz/HooBank_Web_Application' },
   { name: 'Gericht Restaurant', tags: ['React', 'CSS'], link: 'https://github.com/Jevonzz/Gericht_Restaurant_Web_Application' },
