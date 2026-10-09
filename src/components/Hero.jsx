@@ -60,7 +60,7 @@ export default function Hero({ dark }) {
           </h1>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-            Senior frontend developer in {profile.location}, working with React, TypeScript and Flutter. I turn product ideas into
+            Senior frontend developer in {profile.location}, working with React, TypeScript and React Native. I turn product ideas into
             interfaces that feel quick and look sharp.
           </p>
 

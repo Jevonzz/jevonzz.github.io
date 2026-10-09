@@ -12,14 +12,14 @@ export const profile = {
 }
 
 export const about = [
-  "I'm a senior frontend developer at Summit Trade & Resources, building web and mobile products with React, TypeScript and Flutter.",
+  "I'm a senior frontend developer at Summit Trade & Resources, building web and mobile products with React, TypeScript and React Native.",
   "Before that I spent a year and a half at SNSoft shipping features across web and mobile apps and building product analytics with PostHog. Earlier I optimised WordPress sites for SEO and built React and Tailwind apps with cross-functional teams. I care about interfaces that feel fast, look sharp and work for everyone.",
 ]
 
 export const highlights = [
   { value: '2022', label: 'Shipping production code since' },
   { value: '5', label: 'Companies worked with' },
-  { value: 'Web + Mobile', label: 'React and Flutter' },
+  { value: 'Web + Mobile', label: 'React and React Native' },
 ]
 
 export const experiences = [
@@ -30,9 +30,9 @@ export const experiences = [
     logo: '',
     date: 'Aug 2026 – Present',
     points: [
-      'Leading frontend development for web and mobile products with React, TypeScript and Flutter.',
+      'Leading frontend development for web and mobile products with React, TypeScript and React Native.',
     ],
-    tags: ['React', 'TypeScript', 'Flutter'],
+    tags: ['React', 'TypeScript', 'React Native'],
   },
   {
     title: 'Frontend Developer',
@@ -148,8 +148,8 @@ export const skillGroups = [
   {
     title: 'Mobile',
     items: [
+      { name: 'React Native', icon: '/icons/react.svg' },
       { name: 'Flutter', icon: '/icons/flutter.svg' },
-      { name: 'Dart', icon: '/icons/dart.png' },
     ],
   },
   {
