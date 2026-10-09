@@ -12,8 +12,8 @@ export const profile = {
 }
 
 export const about = [
-  "I'm a senior frontend developer at Summit Trade & Resources, building web products with Next.js, React and TypeScript.",
-  "Before that I spent a year and a half at SNSoft building web and React Native mobile apps, including Baiki, and setting up product analytics with PostHog. Earlier I optimised WordPress sites for SEO and built React and Tailwind apps with cross-functional teams. I care about interfaces that feel fast, look sharp and work for everyone.",
+  "I'm a senior frontend developer at Summit Trade & Resources, building web products with Next.js, React and TypeScript. On the side I build Baiki, my own workshop management app for Malaysian car and motorcycle workshops.",
+  "Before that I spent a year and a half at SNSoft building web and React Native mobile apps and setting up product analytics with PostHog. Earlier I optimised WordPress sites for SEO and built React and Tailwind apps with cross-functional teams. I care about interfaces that feel fast, look sharp and work for everyone.",
 ]
 
 export const highlights = [
@@ -40,7 +40,7 @@ export const experiences = [
     logo: '/logos/snsoft.jpg',
     date: 'Jan 2025 – Aug 2026',
     points: [
-      'Built and maintained web and mobile apps with React, TypeScript and React Native, including the Baiki app.',
+      'Built and maintained web and mobile apps with React, TypeScript and React Native.',
       'Integrated PostHog to track click and page-view events across the product.',
       'Extended PostHog with XHR-based event tracking for more accurate, flexible analytics.',
       'Debugged and fixed issues across web and mobile to keep the experience smooth and fast.',
@@ -89,21 +89,14 @@ export const experiences = [
 export const featuredProjects = [
   {
     name: 'Baiki',
-    kind: 'Mobile app · SNSoft',
+    kind: 'Own product · SaaS',
     description:
-      'A production mobile app I built and maintained at SNSoft, with PostHog analytics tracking how people use it.',
-    tags: ['React Native', 'TypeScript', 'PostHog'],
-    link: '',
+      'A mobile-first workshop management app for Malaysian car and motorcycle workshops. It covers customers, vehicles, service history, quotations and invoices with PDF export, parts stock, a job board for cars in the bay, and WhatsApp service reminders. It supports staff accounts on Lite, Pro and Max plans, in English, Bahasa Malaysia and Chinese.',
+    tags: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS', 'shadcn/ui'],
+    link: 'https://baiki-landing.vercel.app/',
+    linkLabel: 'baiki-landing.vercel.app',
+    image: '/projects/baiki.png',
     hue: 'from-violet-500/30 to-cyan-500/30',
-  },
-  {
-    name: 'Car Service Maintenance',
-    kind: 'Mobile app',
-    description:
-      'A full-stack mobile app with three roles. Car owners book services and manage their cars, crew manage appointments and bill customers, and admins manage stock, pricing and staff.',
-    tags: ['React Native', 'Firebase'],
-    link: 'https://github.com/Jevonzz/Car-Service-Maintenance',
-    hue: 'from-sky-500/30 to-indigo-500/30',
   },
   {
     name: 'YOOM',
@@ -126,6 +119,7 @@ export const featuredProjects = [
 ]
 
 export const learningProjects = [
+  { name: 'Car Service Maintenance', tags: ['React Native', 'Firebase'], link: 'https://github.com/Jevonzz/Car-Service-Maintenance' },
   { name: 'Apple iPhone Page', tags: ['React', 'GSAP', 'three.js'], link: 'https://github.com/Jevonzz/apple-web' },
   { name: 'Movie Web App', tags: ['React', 'REST API'], link: 'https://github.com/Jevonzz/Movie-Web-Application' },
   { name: 'HooBank', tags: ['React', 'Tailwind CSS'], link: 'https://github.com/Jevonzz/HooBank_Web_Application' },
