@@ -93,20 +93,29 @@ export const featuredProjects = [
     description:
       'A mobile-first workshop management app for Malaysian car and motorcycle workshops. It covers customers, vehicles, service history, quotations and invoices with PDF export, parts stock, a job board for cars in the bay, and WhatsApp service reminders. It supports staff accounts on Lite, Pro and Max plans, in English, Bahasa Malaysia and Chinese.',
     tags: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS', 'shadcn/ui'],
-    link: 'https://baiki-landing.vercel.app/',
-    linkLabel: 'baiki-landing.vercel.app',
     image: '/projects/baiki.png',
-    hue: 'from-violet-500/30 to-cyan-500/30',
+    links: [
+      { label: 'Live app', url: 'https://baikiapp.vercel.app/' },
+      { label: 'Landing page', url: 'https://baiki-landing.vercel.app/' },
+    ],
   },
   {
     name: 'Landing Page Builder',
     kind: 'Own product · Web app',
     description:
-      'A no-code builder for client landing pages. Pick a template, edit sections, change the theme, preview on any device and publish to its own link. Contact forms on live pages save each lead and open a WhatsApp chat with the business, and the team reviews leads in a dashboard with CSV export.',
+      'A no-code builder for client landing pages. Pick a template, edit sections and theme, preview on desktop, tablet or mobile, then publish to its own link. Contact forms on live pages save each lead and open a WhatsApp chat with the business.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Postgres', 'Auth.js'],
-    link: '',
-    linkLabel: 'Private repo',
-    hue: 'from-sky-500/30 to-violet-500/30',
+    image: '/projects/landing-builder.png',
+    links: [{ label: 'Live app', url: 'https://landing-page-builder-xi-weld.vercel.app/' }],
+  },
+  {
+    name: 'Pocketbook',
+    kind: 'Own product · PWA',
+    description:
+      'A personal money tracker you can install on your phone. It tracks income and expenses, shows a safe-to-spend amount with a 50/30/20 money plan, and charts spending by day and category. It works offline, with data kept on the device and CSV export and backup.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dexie', 'Recharts'],
+    image: '/projects/pocketbook.png',
+    links: [],
   },
   {
     name: 'YOOM',
@@ -114,7 +123,8 @@ export const featuredProjects = [
     description:
       'A Zoom-style video meeting app, using Stream for real-time video and Clerk for authentication.',
     tags: ['Next.js', 'TypeScript', 'Stream', 'Clerk'],
-    link: 'https://github.com/Jevonzz/meeting-web-app',
+    image: '',
+    links: [{ label: 'GitHub', url: 'https://github.com/Jevonzz/meeting-web-app' }],
     hue: 'from-fuchsia-500/30 to-violet-500/30',
   },
 ]

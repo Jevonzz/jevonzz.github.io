@@ -16,57 +16,56 @@ export default function Projects() {
       </SectionHeader>
 
       <div className="mt-12 grid gap-5 md:grid-cols-2">
-        {featuredProjects.map((p, i) => {
-          // Client work without a public repo renders as a plain card.
-          const Card = p.link ? 'a' : 'article'
-          const linkProps = p.link ? { href: p.link, target: '_blank', rel: 'noreferrer' } : {}
-          return (
-          <Card
+        {featuredProjects.map((p, i) => (
+          <article
             key={p.name}
-            {...linkProps}
             onMouseMove={trackSpotlight}
-            className={`card spotlight reveal group flex flex-col p-6 ${p.image ? 'md:col-span-2' : ''} transition duration-300 hover:-translate-y-1 hover:border-accent/50 sm:p-8`}
+            className="card spotlight reveal group flex flex-col p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/50 sm:p-8"
             style={{ '--delay': `${(i % 2) * 90}ms` }}
           >
             {p.image ? (
               <div className="mb-6 overflow-hidden rounded-xl border border-line">
-                <img src={p.image} alt={`${p.name} preview`} className="aspect-[1200/630] w-full object-cover transition duration-500 group-hover:scale-[1.03]" loading="lazy" />
+                <img src={p.image} alt={`${p.name} screenshot`} className="aspect-[1200/630] w-full object-cover transition duration-500 group-hover:scale-[1.03]" loading="lazy" />
               </div>
             ) : (
-            <div className={`relative mb-6 overflow-hidden rounded-xl border border-line bg-gradient-to-br ${p.hue} p-4`} aria-hidden="true">
-                <div className="rounded-lg border border-line bg-canvas/80 shadow-xl backdrop-blur transition duration-500 group-hover:-translate-y-1 group-hover:rotate-[-1deg]">
+              <div className={`mb-6 grid aspect-[1200/630] place-items-center overflow-hidden rounded-xl border border-line bg-gradient-to-br ${p.hue} p-4`} aria-hidden="true">
+                <div className="w-full max-w-sm rounded-lg border border-line bg-canvas/80 shadow-xl backdrop-blur transition duration-500 group-hover:-translate-y-1 group-hover:rotate-[-1deg]">
                   <div className="flex items-center gap-1.5 border-b border-line px-3 py-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
                     <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
                     <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-                    <span className="ml-3 truncate font-mono text-[11px] text-muted">{p.linkLabel || (p.link ? `github.com/Jevonzz/${p.link.split('/').pop()}` : 'Professional work')}</span>
                   </div>
                   <div className="space-y-2 p-4 font-mono text-xs leading-relaxed">
                     <p><span className="text-accent">const</span> project = <span className="text-accent2">'{p.name}'</span></p>
                     <p><span className="text-accent">const</span> stack = [{p.tags.map((t) => `'${t}'`).join(', ')}]</p>
-                    <div className="flex gap-2 pt-1">
-                      <span className="h-2 w-1/3 rounded bg-accent/40" />
-                      <span className="h-2 w-1/5 rounded bg-accent2/40" />
-                      <span className="h-2 w-1/4 rounded bg-line" />
-                    </div>
                   </div>
                 </div>
               </div>
             )}
             <p className="text-xs font-semibold uppercase tracking-widest text-accent">{p.kind}</p>
-            <h3 className="mt-2 flex items-center justify-between font-display text-xl font-semibold">
-              {p.name}
-              {p.link && <ArrowUpRight className="text-muted transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink" />}
-            </h3>
+            <h3 className="mt-2 font-display text-xl font-semibold">{p.name}</h3>
             <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{p.description}</p>
             <ul className="mt-5 flex flex-wrap gap-2" aria-label="Technologies">
               {p.tags.map((t) => (
                 <li key={t} className="chip">{t}</li>
               ))}
             </ul>
-          </Card>
-          )
-        })}
+            {p.demo && (
+              <p className="mt-4 rounded-lg border border-dashed border-line px-3 py-2 text-xs text-muted">
+                Demo login: <span className="font-mono text-ink">{p.demo.email}</span> · <span className="font-mono text-ink">{p.demo.password}</span>
+              </p>
+            )}
+            {p.links.length > 0 && (
+              <div className="mt-5 flex flex-wrap gap-2">
+                {p.links.map((l) => (
+                  <a key={l.url} href={l.url} target="_blank" rel="noreferrer" className="btn-ghost py-2" aria-label={`${p.name}: ${l.label}`}>
+                    {l.label} <ArrowUpRight />
+                  </a>
+                ))}
+              </div>
+            )}
+          </article>
+        ))}
       </div>
 
       <div className="reveal mt-14">
