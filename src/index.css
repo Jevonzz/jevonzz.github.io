@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --canvas: 250 250 252;
+    --surface: 255 255 255;
+    --ink: 15 15 25;
+    --muted: 82 82 100;
+    --line: 226 226 234;
+    --accent: 91 61 245;
+    --accent2: 8 145 178;
+    color-scheme: light;
+  }
+
+  .dark {
+    --canvas: 9 9 15;
+    --surface: 19 19 28;
+    --ink: 240 240 248;
+    --muted: 160 160 180;
+    --line: 39 39 54;
+    --accent: 139 112 255;
+    --accent2: 34 211 238;
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.3);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-page px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply container-page py-20 sm:py-28;
+  }
+
+  .eyebrow {
+    @apply font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent;
+  }
+
+  .heading {
+    @apply mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent to-accent2 bg-clip-text text-transparent;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-surface/70 backdrop-blur;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-ink text-canvas hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25;
+  }
+
+  .btn-ghost {
+    @apply btn border border-line bg-surface/60 hover:-translate-y-0.5 hover:border-accent/60;
+  }
+
+  .chip {
+    @apply rounded-full border border-line px-2.5 py-0.5 text-xs font-medium text-muted;
+  }
+
+  .field {
+    @apply mt-2 w-full rounded-xl border border-line bg-canvas px-4 py-3 text-ink placeholder:text-muted/70 transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30;
+  }
+
+  /* Spotlight that follows the cursor on cards. */
+  .spotlight {
+    position: relative;
+    overflow: hidden;
+  }
+  .spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgb(var(--accent) / 0.14), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Scroll reveal, applied by the useReveal hook. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.grid-bg {
+  background-image: linear-gradient(rgb(var(--line) / 0.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--line) / 0.6) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
