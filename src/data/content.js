@@ -2,9 +2,9 @@
 
 export const profile = {
   name: 'Jevon',
-  role: 'Frontend Engineer',
+  role: 'Senior Frontend Developer',
   location: 'Malaysia',
-  company: { name: 'SNSoft Sdn Bhd', url: 'https://www.snsoft.my/' },
+  company: { name: 'Summit Trade & Resources' },
   github: 'https://github.com/Jevonzz',
   // Add your LinkedIn profile URL and CV path to show those buttons.
   linkedin: '',
@@ -12,27 +12,38 @@ export const profile = {
 }
 
 export const about = [
-  "I'm a frontend engineer who builds web and mobile apps with React, TypeScript and Flutter. Right now I'm at SNSoft, shipping features across web and mobile and wiring up product analytics with PostHog.",
-  "Before that I built and optimised WordPress sites for SEO, and shipped React and Tailwind apps with cross-functional teams. I care about interfaces that feel fast, look sharp and are easy for everyone to use.",
+  "I'm a senior frontend developer at Summit Trade & Resources, building web and mobile products with React, TypeScript and Flutter.",
+  "Before that I spent a year and a half at SNSoft shipping features across web and mobile apps and building product analytics with PostHog. Earlier I optimised WordPress sites for SEO and built React and Tailwind apps with cross-functional teams. I care about interfaces that feel fast, look sharp and work for everyone.",
 ]
 
 export const highlights = [
   { value: '2022', label: 'Shipping production code since' },
-  { value: '4', label: 'Companies worked with' },
+  { value: '5', label: 'Companies worked with' },
   { value: 'Web + Mobile', label: 'React and Flutter' },
 ]
 
 export const experiences = [
   {
+    title: 'Senior Frontend Developer',
+    company: 'Summit Trade & Resources',
+    // Drop the company logo in public/logos/ and set its path here.
+    logo: '',
+    date: 'Aug 2026 – Present',
+    points: [
+      'Leading frontend development for web and mobile products with React, TypeScript and Flutter.',
+    ],
+    tags: ['React', 'TypeScript', 'Flutter'],
+  },
+  {
     title: 'Frontend Developer',
     company: 'SNSoft Sdn Bhd',
     logo: '/logos/snsoft.jpg',
-    date: 'Jan 2025 – Present',
+    date: 'Jan 2025 – Aug 2026',
     points: [
-      'Build and maintain frontend features in React, TypeScript and Flutter across web and mobile apps.',
+      'Built and maintained frontend features in React, TypeScript and Flutter across web and mobile apps, including Baiki.',
       'Integrated PostHog to track click and page-view events across the product.',
       'Extended PostHog with XHR-based event tracking for more accurate, flexible analytics.',
-      'Debug and fix issues across web and mobile to keep the experience smooth and fast.',
+      'Debugged and fixed issues across web and mobile to keep the experience smooth and fast.',
     ],
     tags: ['React', 'TypeScript', 'Flutter', 'PostHog'],
   },

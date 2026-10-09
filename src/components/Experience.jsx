@@ -9,7 +9,13 @@ export default function Experience() {
         {experiences.map((job, i) => (
           <li key={job.company} className="reveal relative flex gap-4 sm:gap-6" style={{ '--delay': `${i * 60}ms` }}>
             <div className="relative z-10 grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl border border-line bg-white sm:h-14 sm:w-14">
-              <img src={job.logo} alt="" className="h-3/4 w-3/4 object-contain" loading="lazy" />
+              {job.logo ? (
+                <img src={job.logo} alt="" className="h-3/4 w-3/4 object-contain" loading="lazy" />
+              ) : (
+                <span className="font-display text-sm font-bold text-zinc-800" aria-hidden="true">
+                  {job.company.split(/\s+/).filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).join('').slice(0, 3)}
+                </span>
+              )}
             </div>
             <article className="card spotlight flex-1 p-5 sm:p-6">
               <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
