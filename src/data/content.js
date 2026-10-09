@@ -22,6 +22,9 @@ export const highlights = [
   { value: 'Web + Mobile', label: 'React and React Native' },
 ]
 
+// Scrolling strip under the hero.
+export const marquee = ['Next.js', 'React', 'TypeScript', 'React Native', 'Tailwind CSS', 'Supabase', 'Postgres', 'Node.js', 'three.js', 'PostHog', 'shadcn/ui', 'Vite']
+
 export const experiences = [
   {
     title: 'Senior Frontend Developer',

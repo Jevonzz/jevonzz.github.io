@@ -1,5 +1,5 @@
 import { useMemo, useRef } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
 // 3D simplex noise by Ian McEwan / Ashima Arts (MIT).
@@ -49,100 +49,206 @@ float snoise(vec3 v){
 }
 `
 
-const vertexShader = /* glsl */ `
+// Liquid blob: a dense sphere whose surface is pushed around by layered noise.
+// Normals are rebuilt from neighbouring points so the lighting follows the waves.
+const blobVertex = /* glsl */ `
 uniform float uTime;
-uniform vec2 uPointer;
-uniform float uPixelRatio;
-attribute float aSeed;
-varying float vMix;
-varying float vAlpha;
+uniform vec3 uPointer;
+uniform float uHover;
+varying vec3 vNormal;
+varying vec3 vView;
+varying float vDisp;
 ${noise}
+float displace(vec3 p){
+  vec3 d = normalize(p);
+  // Domain warp gives the slow, folding motion of liquid metal.
+  vec3 q = d * 0.85 + vec3(0.0, uTime * 0.16, uTime * 0.09);
+  q += 0.35 * vec3(snoise(q + 3.1), snoise(q + 7.4), snoise(q + 11.7));
+  float n = snoise(q);
+  float n2 = snoise(d * 1.8 - vec3(uTime * 0.12)) * 0.18;
+  float pull = pow(max(dot(d, uPointer), 0.0), 5.0) * (0.16 + uHover * 0.2);
+  return (n + n2) * 0.26 + pull;
+}
+vec3 surface(vec3 p){ return p + normalize(p) * displace(p); }
 void main(){
-  vec3 dir = normalize(position);
-  float n = snoise(dir * 1.4 + vec3(uTime * 0.18));
-  float n2 = snoise(dir * 3.2 - vec3(uTime * 0.12));
-  // Bulge toward the pointer so the shape feels alive under the cursor.
-  float pull = max(dot(dir, normalize(vec3(uPointer, 0.9))), 0.0);
-  float r = 1.0 + n * 0.28 + n2 * 0.08 + pow(pull, 6.0) * 0.25;
-  vec3 pos = dir * r * 1.55;
-  vec4 mv = modelViewMatrix * vec4(pos, 1.0);
+  vec3 n = normalize(position);
+  vec3 a = abs(n.y) > 0.99 ? vec3(1.0, 0.0, 0.0) : vec3(0.0, 1.0, 0.0);
+  vec3 t = normalize(cross(n, a));
+  vec3 b = cross(n, t);
+  float e = 0.012;
+  vec3 p0 = surface(position);
+  vec3 p1 = surface(position + t * e);
+  vec3 p2 = surface(position + b * e);
+  vec3 nn = normalize(cross(p1 - p0, p2 - p0));
+  vDisp = displace(position);
+  vNormal = normalize(normalMatrix * nn);
+  vec4 mv = modelViewMatrix * vec4(p0, 1.0);
+  vView = normalize(-mv.xyz);
   gl_Position = projectionMatrix * mv;
-  gl_PointSize = (1.6 + aSeed * 2.2) * uPixelRatio * (6.0 / -mv.z);
-  vMix = clamp(n * 0.5 + 0.5 + dir.y * 0.25, 0.0, 1.0);
-  vAlpha = 0.35 + 0.65 * smoothstep(-0.2, 0.9, n2 + pull);
 }
 `
 
-const fragmentShader = /* glsl */ `
+const blobFragment = /* glsl */ `
+uniform float uTime;
 uniform vec3 uColorA;
 uniform vec3 uColorB;
+uniform vec3 uColorC;
+uniform vec3 uBase;
+uniform float uDark;
+varying vec3 vNormal;
+varying vec3 vView;
+varying float vDisp;
+void main(){
+  vec3 N = normalize(vNormal);
+  vec3 V = normalize(vView);
+  float ndv = max(dot(N, V), 0.0);
+  float fres = pow(1.0 - ndv, 2.2);
+
+  // Thin-film style colour shift, kept to the brand palette.
+  float k = ndv * 1.6 + vDisp * 2.2 + N.y * 0.4 + uTime * 0.04;
+  vec3 w = 0.5 + 0.5 * cos(6.28318 * (k + vec3(0.0, 0.33, 0.67)));
+  vec3 film = (uColorA * w.x + uColorB * w.y + uColorC * w.z) / max(w.x + w.y + w.z, 0.001);
+
+  // Fake studio reflections: a soft top light and a bright horizon band.
+  vec3 R = reflect(-V, N);
+  float env = smoothstep(0.35, 1.0, R.y) * 0.85 + exp(-pow((R.y + 0.05) * 5.0, 2.0)) * 0.45;
+
+  vec3 L1 = normalize(vec3(-0.6, 0.8, 0.7));
+  vec3 L2 = normalize(vec3(0.8, -0.3, 0.5));
+  float spec = pow(max(dot(N, normalize(L1 + V)), 0.0), 90.0) * 1.2
+             + pow(max(dot(N, normalize(L2 + V)), 0.0), 40.0) * 0.35;
+
+  vec3 col = mix(uBase, film, 0.35 + fres * 0.65);
+  col += film * env * (0.55 + 0.25 * uDark);
+  col += vec3(1.0) * (spec + env * 0.18);
+  col += film * fres * 0.6 * uDark;
+  gl_FragColor = vec4(col, 1.0);
+  #include <colorspace_fragment>
+}
+`
+
+// Soft dust that drifts around the blob for depth.
+const dustVertex = /* glsl */ `
+uniform float uTime;
+uniform float uPixelRatio;
+attribute float aSeed;
+varying float vAlpha;
+void main(){
+  vec3 p = position;
+  float a = uTime * (0.04 + aSeed * 0.06);
+  p.xz = mat2(cos(a), -sin(a), sin(a), cos(a)) * p.xz;
+  p.y += sin(uTime * 0.5 + aSeed * 6.28) * 0.08;
+  vec4 mv = modelViewMatrix * vec4(p, 1.0);
+  gl_Position = projectionMatrix * mv;
+  gl_PointSize = (1.0 + aSeed * 2.5) * uPixelRatio * (6.0 / -mv.z);
+  vAlpha = 0.25 + 0.75 * aSeed;
+}
+`
+
+const dustFragment = /* glsl */ `
+uniform vec3 uColor;
 uniform float uOpacity;
-varying float vMix;
 varying float vAlpha;
 void main(){
   float d = length(gl_PointCoord - 0.5);
   if (d > 0.5) discard;
-  float glow = smoothstep(0.5, 0.0, d);
-  gl_FragColor = vec4(mix(uColorA, uColorB, vMix), glow * vAlpha * uOpacity);
+  gl_FragColor = vec4(uColor, smoothstep(0.5, 0.0, d) * vAlpha * uOpacity);
 }
 `
 
-function fibonacciSphere(count) {
-  const positions = new Float32Array(count * 3)
-  const seeds = new Float32Array(count)
-  const golden = Math.PI * (3 - Math.sqrt(5))
-  for (let i = 0; i < count; i++) {
-    const y = 1 - (i / (count - 1)) * 2
-    const radius = Math.sqrt(1 - y * y)
-    const theta = golden * i
-    positions.set([Math.cos(theta) * radius, y, Math.sin(theta) * radius], i * 3)
-    seeds[i] = Math.random()
-  }
-  return { positions, seeds }
+const palettes = {
+  dark: { a: '#8b70ff', b: '#22d3ee', c: '#f472b6', base: '#0d0b1f', dust: '#a5b4fc' },
+  light: { a: '#6d4dff', b: '#06b6d4', c: '#ec4899', base: '#e9e5ff', dust: '#6d4dff' },
 }
 
-function Blob({ dark, animate }) {
-  const points = useRef()
+function Blob({ dark, animate, small }) {
+  const mesh = useRef()
   const pointer = useRef(new THREE.Vector2())
-  const { gl } = useThree()
-  const count = typeof window !== 'undefined' && window.innerWidth < 768 ? 9000 : 16000
-  const { positions, seeds } = useMemo(() => fibonacciSphere(count), [count])
+  const hover = useRef(0)
+  const p = dark ? palettes.dark : palettes.light
 
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
-      uPointer: { value: new THREE.Vector2() },
-      uPixelRatio: { value: gl.getPixelRatio() },
+      uPointer: { value: new THREE.Vector3(0, 0, 1) },
+      uHover: { value: 0 },
       uColorA: { value: new THREE.Color() },
       uColorB: { value: new THREE.Color() },
-      uOpacity: { value: 1 },
+      uColorC: { value: new THREE.Color() },
+      uBase: { value: new THREE.Color() },
+      uDark: { value: 1 },
     }),
-    [gl]
+    []
   )
-
-  // Colours follow the site theme: brighter glow on dark, deeper tones on light.
-  uniforms.uColorA.value.set(dark ? '#7c5cff' : '#5b3df5')
-  uniforms.uColorB.value.set(dark ? '#22d3ee' : '#0891b2')
-  uniforms.uOpacity.value = dark ? 0.95 : 0.8
+  uniforms.uColorA.value.set(p.a)
+  uniforms.uColorB.value.set(p.b)
+  uniforms.uColorC.value.set(p.c)
+  uniforms.uBase.value.set(p.base)
+  uniforms.uDark.value = dark ? 1 : 0
 
   useFrame((state, delta) => {
     if (!animate) return
-    uniforms.uTime.value += delta
-    pointer.current.lerp(state.pointer, 0.05)
-    uniforms.uPointer.value.copy(pointer.current)
-    points.current.rotation.y += delta * 0.08
-    points.current.rotation.x = pointer.current.y * 0.25
+    const dt = Math.min(delta, 0.05)
+    uniforms.uTime.value += dt
+    pointer.current.lerp(state.pointer, 0.06)
+    const target = Math.min(Math.hypot(state.pointer.x, state.pointer.y), 1) > 0 ? 1 : 0
+    hover.current += (target - hover.current) * 0.04
+    uniforms.uHover.value = hover.current
+    // Pointer direction in the blob's local space, so the bulge tracks the cursor while it spins.
+    const dir = new THREE.Vector3(pointer.current.x, pointer.current.y, 0.8).normalize()
+    uniforms.uPointer.value.copy(dir.applyQuaternion(mesh.current.quaternion.clone().invert()))
+    mesh.current.rotation.y += dt * 0.12
+    mesh.current.rotation.x = THREE.MathUtils.lerp(mesh.current.rotation.x, -pointer.current.y * 0.35, 0.05)
+    mesh.current.position.y = Math.sin(uniforms.uTime.value * 0.6) * 0.06
   })
 
   return (
-    <points ref={points}>
+    <mesh ref={mesh} scale={1.45}>
+      <icosahedronGeometry args={[1, small ? 40 : 72]} />
+      <shaderMaterial vertexShader={blobVertex} fragmentShader={blobFragment} uniforms={uniforms} />
+    </mesh>
+  )
+}
+
+function Dust({ dark, animate, count }) {
+  const { positions, seeds } = useMemo(() => {
+    const positions = new Float32Array(count * 3)
+    const seeds = new Float32Array(count)
+    for (let i = 0; i < count; i++) {
+      const r = 2.1 + Math.random() * 1.6
+      const th = Math.random() * Math.PI * 2
+      const ph = Math.acos(2 * Math.random() - 1)
+      positions.set([r * Math.sin(ph) * Math.cos(th), r * Math.cos(ph) * 0.6, r * Math.sin(ph) * Math.sin(th)], i * 3)
+      seeds[i] = Math.random()
+    }
+    return { positions, seeds }
+  }, [count])
+
+  const uniforms = useMemo(
+    () => ({
+      uTime: { value: 0 },
+      uPixelRatio: { value: Math.min(window.devicePixelRatio, 1.75) },
+      uColor: { value: new THREE.Color() },
+      uOpacity: { value: 1 },
+    }),
+    []
+  )
+  uniforms.uColor.value.set(dark ? palettes.dark.dust : palettes.light.dust)
+  uniforms.uOpacity.value = dark ? 0.7 : 0.45
+
+  useFrame((_, delta) => {
+    if (animate) uniforms.uTime.value += Math.min(delta, 0.05)
+  })
+
+  return (
+    <points>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
         <bufferAttribute attach="attributes-aSeed" args={[seeds, 1]} />
       </bufferGeometry>
       <shaderMaterial
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
+        vertexShader={dustVertex}
+        fragmentShader={dustFragment}
         uniforms={uniforms}
         transparent
         depthWrite={false}
@@ -153,15 +259,17 @@ function Blob({ dark, animate }) {
 }
 
 export default function HeroScene({ dark, reducedMotion, paused }) {
+  const small = typeof window !== 'undefined' && window.innerWidth < 768
   return (
     <Canvas
       camera={{ position: [0, 0, 6.2], fov: 45 }}
       dpr={[1, 1.75]}
-      gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
+      gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       frameloop={reducedMotion || paused ? 'demand' : 'always'}
       aria-hidden="true"
     >
-      <Blob dark={dark} animate={!reducedMotion} />
+      <Blob dark={dark} animate={!reducedMotion} small={small} />
+      <Dust dark={dark} animate={!reducedMotion} count={small ? 250 : 600} />
     </Canvas>
   )
 }

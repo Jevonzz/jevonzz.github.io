@@ -4,7 +4,7 @@ import SectionHeader from './SectionHeader'
 export default function Experience() {
   return (
     <section id="experience" className="section">
-      <SectionHeader eyebrow="Experience" title="Where I've worked" />
+      <SectionHeader index="02" eyebrow="Experience" title="Where I've worked" />
       <ol className="relative mt-12 space-y-6 before:absolute before:bottom-2 before:left-[1.4rem] before:top-2 before:w-px before:bg-gradient-to-b before:from-accent before:via-line before:to-transparent sm:before:left-[1.65rem]">
         {experiences.map((job, i) => (
           <li key={job.company} className="reveal relative flex gap-4 sm:gap-6" style={{ '--delay': `${i * 60}ms` }}>
@@ -17,7 +17,7 @@ export default function Experience() {
                 </span>
               )}
             </div>
-            <article className="card spotlight flex-1 p-5 sm:p-6">
+            <article className="card glow-border flex-1 p-5 sm:p-6">
               <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                 <h3 className="font-display text-lg font-semibold">
                   {job.title} <span className="text-muted">· {job.company}</span>

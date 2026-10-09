@@ -11,7 +11,7 @@ function trackSpotlight(e) {
 export default function Projects() {
   return (
     <section id="work" className="section">
-      <SectionHeader eyebrow="Selected work" title="Things I've built">
+      <SectionHeader index="03" eyebrow="Selected work" title="Things I've built">
         A mix of full-stack apps and front-end experiments. Starting with products I build and run myself, followed by open-source projects you can dig into on GitHub.
       </SectionHeader>
 
@@ -20,15 +20,15 @@ export default function Projects() {
           <article
             key={p.name}
             onMouseMove={trackSpotlight}
-            className="card spotlight reveal group flex flex-col p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/50 sm:p-8"
+            className="card glow-border spotlight reveal group flex flex-col p-5 transition duration-500 hover:-translate-y-1 sm:p-6"
             style={{ '--delay': `${(i % 2) * 90}ms` }}
           >
             {p.image ? (
-              <div className="mb-6 overflow-hidden rounded-xl border border-line">
-                <img src={p.image} alt={`${p.name} screenshot`} className="aspect-[1200/630] w-full object-cover transition duration-500 group-hover:scale-[1.03]" loading="lazy" />
+              <div className="mb-6 overflow-hidden rounded-2xl border border-line">
+                <img src={p.image} alt={`${p.name} screenshot`} className="aspect-[1200/630] w-full object-cover transition duration-500 group-hover:scale-[1.04]" loading="lazy" />
               </div>
             ) : (
-              <div className={`mb-6 grid aspect-[1200/630] place-items-center overflow-hidden rounded-xl border border-line bg-gradient-to-br ${p.hue} p-4`} aria-hidden="true">
+              <div className={`mb-6 grid aspect-[1200/630] place-items-center overflow-hidden rounded-2xl border border-line bg-gradient-to-br ${p.hue} p-4`} aria-hidden="true">
                 <div className="w-full max-w-sm rounded-lg border border-line bg-canvas/80 shadow-xl backdrop-blur transition duration-500 group-hover:-translate-y-1 group-hover:rotate-[-1deg]">
                   <div className="flex items-center gap-1.5 border-b border-line px-3 py-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
@@ -42,10 +42,12 @@ export default function Projects() {
                 </div>
               </div>
             )}
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent">{p.kind}</p>
-            <h3 className="mt-2 font-display text-xl font-semibold">{p.name}</h3>
-            <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{p.description}</p>
-            <ul className="mt-5 flex flex-wrap gap-2" aria-label="Technologies">
+            <div className="flex items-center justify-between gap-4 px-1">
+              <h3 className="font-display text-2xl font-semibold tracking-tight">{p.name}</h3>
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.15em] text-muted">{p.kind}</span>
+            </div>
+            <p className="mt-3 flex-1 px-1 text-sm leading-relaxed text-muted">{p.description}</p>
+            <ul className="mt-5 flex flex-wrap gap-2 px-1" aria-label="Technologies">
               {p.tags.map((t) => (
                 <li key={t} className="chip">{t}</li>
               ))}
@@ -56,7 +58,7 @@ export default function Projects() {
               </p>
             )}
             {p.links.length > 0 && (
-              <div className="mt-5 flex flex-wrap gap-2">
+              <div className="mt-5 flex flex-wrap gap-2 px-1">
                 {p.links.map((l) => (
                   <a key={l.url} href={l.url} target="_blank" rel="noreferrer" className="btn-ghost py-2" aria-label={`${p.name}: ${l.label}`}>
                     {l.label} <ArrowUpRight />
@@ -69,12 +71,12 @@ export default function Projects() {
       </div>
 
       <div className="reveal mt-14">
-        <h3 className="font-display text-lg font-semibold">Learning projects</h3>
+        <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">Learning projects</h3>
         <ul className="mt-4 divide-y divide-line border-y border-line">
           {learningProjects.map((p) => (
             <li key={p.name}>
               <a href={p.link} target="_blank" rel="noreferrer" className="group flex items-center justify-between gap-4 py-4">
-                <span className="font-medium transition group-hover:text-accent">{p.name}</span>
+                <span className="font-display text-lg font-medium transition group-hover:translate-x-1 group-hover:text-accent sm:text-xl">{p.name}</span>
                 <span className="flex items-center gap-3">
                   <span className="hidden gap-2 sm:flex">
                     {p.tags.map((t) => (

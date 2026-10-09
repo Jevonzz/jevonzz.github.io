@@ -32,13 +32,13 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section">
-      <div className="card reveal relative overflow-hidden p-6 sm:p-12">
+      <div className="card reveal relative overflow-hidden rounded-[2rem] p-6 sm:p-12">
         <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
         <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-accent2/15 blur-3xl" aria-hidden="true" />
 
         <div className="relative grid gap-10 lg:grid-cols-[1fr_1.2fr]">
           <div>
-            <SectionHeader eyebrow="Contact" title="Let's build something together">
+            <SectionHeader index="05" eyebrow="Contact" title="Let's build something together">
               Have a role, a project or just a question? Send me a message and I'll get back to you.
             </SectionHeader>
             <div className="mt-8 flex flex-wrap gap-3">

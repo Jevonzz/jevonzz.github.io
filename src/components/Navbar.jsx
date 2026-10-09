@@ -42,12 +42,13 @@ export default function Navbar({ dark, toggle }) {
   }, [open])
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled || open ? 'border-b border-line bg-canvas/80 backdrop-blur-xl' : 'border-b border-transparent'
-      }`}
-    >
-      <nav className="container-page flex h-16 items-center justify-between" aria-label="Main">
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:pt-4">
+      <nav
+        className={`mx-auto flex h-14 max-w-4xl items-center justify-between rounded-full border pl-5 pr-2 transition-all duration-300 ${
+          scrolled || open ? 'border-line bg-canvas/70 shadow-lg shadow-black/5 backdrop-blur-xl' : 'border-transparent'
+        }`}
+        aria-label="Main"
+      >
         <a href="#top" className="font-display text-lg font-bold tracking-tight">
           jevon<span className="gradient-text">.</span>
         </a>
@@ -59,7 +60,7 @@ export default function Navbar({ dark, toggle }) {
                 href={l.href}
                 aria-current={active === l.href ? 'true' : undefined}
                 className={`rounded-full px-3.5 py-2 text-sm font-medium transition hover:text-ink ${
-                  active === l.href ? 'bg-surface text-ink shadow-sm ring-1 ring-line' : 'text-muted'
+                  active === l.href ? 'bg-ink/[0.06] text-ink dark:bg-white/10' : 'text-muted'
                 }`}
               >
                 {l.label}
@@ -68,19 +69,22 @@ export default function Navbar({ dark, toggle }) {
           ))}
         </ul>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <button
             type="button"
             onClick={toggle}
-            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface/60 text-muted transition hover:text-ink"
+            className="grid h-10 w-10 place-items-center rounded-full text-muted transition hover:bg-ink/[0.06] hover:text-ink dark:hover:bg-white/10"
             aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'}
           >
             {dark ? <Sun /> : <Moon />}
           </button>
+          <a href="#contact" className="btn-primary hidden py-2 sm:inline-flex">
+            Let's talk
+          </a>
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
-            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface/60 md:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full md:hidden"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
             aria-controls="mobile-menu"
@@ -91,10 +95,10 @@ export default function Navbar({ dark, toggle }) {
       </nav>
 
       {open && (
-        <ul id="mobile-menu" className="container-page flex flex-col gap-1 pb-4 md:hidden">
+        <ul id="mobile-menu" className="glass mx-auto mt-2 flex max-w-4xl flex-col gap-1 rounded-3xl p-2 md:hidden">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} onClick={() => setOpen(false)} className="block rounded-xl px-3 py-3 text-base font-medium hover:bg-surface">
+              <a href={l.href} onClick={() => setOpen(false)} className="block rounded-2xl px-4 py-3 text-base font-medium hover:bg-ink/[0.06] dark:hover:bg-white/10">
                 {l.label}
               </a>
             </li>
