@@ -99,6 +99,16 @@ export const featuredProjects = [
     hue: 'from-violet-500/30 to-cyan-500/30',
   },
   {
+    name: 'Landing Page Builder',
+    kind: 'Own product · Web app',
+    description:
+      'A no-code builder for client landing pages. Pick a template, edit sections, change the theme, preview on any device and publish to its own link. Contact forms on live pages save each lead and open a WhatsApp chat with the business, and the team reviews leads in a dashboard with CSV export.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Postgres', 'Auth.js'],
+    link: '',
+    linkLabel: 'Private repo',
+    hue: 'from-sky-500/30 to-violet-500/30',
+  },
+  {
     name: 'YOOM',
     kind: 'Video meetings',
     description:
@@ -107,18 +117,10 @@ export const featuredProjects = [
     link: 'https://github.com/Jevonzz/meeting-web-app',
     hue: 'from-fuchsia-500/30 to-violet-500/30',
   },
-  {
-    name: 'e-Commerce Store',
-    kind: 'Full-stack web',
-    description:
-      'An online store with a headless CMS, Stripe checkout and separate user and admin experiences.',
-    tags: ['Payload CMS', 'TypeScript', 'Stripe', 'SCSS'],
-    link: 'https://github.com/Jevonzz/e-commerce',
-    hue: 'from-amber-500/30 to-rose-500/30',
-  },
 ]
 
 export const learningProjects = [
+  { name: 'e-Commerce Store', tags: ['Payload CMS', 'Stripe'], link: 'https://github.com/Jevonzz/e-commerce' },
   { name: 'Car Service Maintenance', tags: ['React Native', 'Firebase'], link: 'https://github.com/Jevonzz/Car-Service-Maintenance' },
   { name: 'Apple iPhone Page', tags: ['React', 'GSAP', 'three.js'], link: 'https://github.com/Jevonzz/apple-web' },
   { name: 'Movie Web App', tags: ['React', 'REST API'], link: 'https://github.com/Jevonzz/Movie-Web-Application' },

@@ -12,7 +12,7 @@ export default function Projects() {
   return (
     <section id="work" className="section">
       <SectionHeader eyebrow="Selected work" title="Things I've built">
-        A mix of full-stack apps and front-end experiments. Starting with Baiki, a product I build and run myself, followed by open-source projects you can dig into on GitHub.
+        A mix of full-stack apps and front-end experiments. Starting with products I build and run myself, followed by open-source projects you can dig into on GitHub.
       </SectionHeader>
 
       <div className="mt-12 grid gap-5 md:grid-cols-2">
