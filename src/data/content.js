@@ -29,8 +29,7 @@ export const experiences = [
   {
     title: 'Senior Frontend Developer',
     company: 'Summit Trade & Resources',
-    // Drop the company logo in public/logos/ and set its path here.
-    logo: '',
+    logo: '/logos/summit.png',
     date: 'Aug 2026 – Present',
     points: [
       'Leading frontend development of web products with Next.js, React and TypeScript.',
@@ -118,7 +117,7 @@ export const featuredProjects = [
       'A personal money tracker you can install on your phone. It tracks income and expenses, shows a safe-to-spend amount with a 50/30/20 money plan, and charts spending by day and category. It works offline, with data kept on the device and CSV export and backup.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dexie', 'Recharts'],
     image: '/projects/pocketbook.png',
-    links: [],
+    links: [{ label: 'Live app', url: 'https://pocketbook-eight.vercel.app/' }],
   },
   {
     name: 'YOOM',

@@ -161,7 +161,7 @@ const palettes = {
   light: { a: '#6d4dff', b: '#06b6d4', c: '#ec4899', base: '#e9e5ff', dust: '#6d4dff' },
 }
 
-function Blob({ dark, animate, small }) {
+function Blob({ dark, calm, small }) {
   const mesh = useRef()
   const pointer = useRef(new THREE.Vector2())
   const hover = useRef(0)
@@ -187,8 +187,8 @@ function Blob({ dark, animate, small }) {
   uniforms.uDark.value = dark ? 1 : 0
 
   useFrame((state, delta) => {
-    if (!animate) return
-    const dt = Math.min(delta, 0.05)
+    // Reduced motion keeps a slow morph but drops the spin and bobbing.
+    const dt = Math.min(delta, 0.05) * (calm ? 0.35 : 1)
     uniforms.uTime.value += dt
     pointer.current.lerp(state.pointer, 0.06)
     const target = Math.min(Math.hypot(state.pointer.x, state.pointer.y), 1) > 0 ? 1 : 0
@@ -197,6 +197,7 @@ function Blob({ dark, animate, small }) {
     // Pointer direction in the blob's local space, so the bulge tracks the cursor while it spins.
     const dir = new THREE.Vector3(pointer.current.x, pointer.current.y, 0.8).normalize()
     uniforms.uPointer.value.copy(dir.applyQuaternion(mesh.current.quaternion.clone().invert()))
+    if (calm) return
     mesh.current.rotation.y += dt * 0.12
     mesh.current.rotation.x = THREE.MathUtils.lerp(mesh.current.rotation.x, -pointer.current.y * 0.35, 0.05)
     mesh.current.position.y = Math.sin(uniforms.uTime.value * 0.6) * 0.06
@@ -210,7 +211,7 @@ function Blob({ dark, animate, small }) {
   )
 }
 
-function Dust({ dark, animate, count }) {
+function Dust({ dark, calm, count }) {
   const { positions, seeds } = useMemo(() => {
     const positions = new Float32Array(count * 3)
     const seeds = new Float32Array(count)
@@ -237,7 +238,7 @@ function Dust({ dark, animate, count }) {
   uniforms.uOpacity.value = dark ? 0.7 : 0.45
 
   useFrame((_, delta) => {
-    if (animate) uniforms.uTime.value += Math.min(delta, 0.05)
+    uniforms.uTime.value += Math.min(delta, 0.05) * (calm ? 0.35 : 1)
   })
 
   return (
@@ -258,18 +259,21 @@ function Dust({ dark, animate, count }) {
   )
 }
 
-export default function HeroScene({ dark, reducedMotion, paused }) {
+export default function HeroScene({ dark, reducedMotion, paused, eventSource }) {
   const small = typeof window !== 'undefined' && window.innerWidth < 768
   return (
     <Canvas
+      // Track the pointer across the whole hero, not just over the canvas.
+      eventSource={eventSource}
+      eventPrefix="client"
       camera={{ position: [0, 0, 6.2], fov: 45 }}
       dpr={[1, 1.75]}
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-      frameloop={reducedMotion || paused ? 'demand' : 'always'}
+      frameloop={paused ? 'never' : 'always'}
       aria-hidden="true"
     >
-      <Blob dark={dark} animate={!reducedMotion} small={small} />
-      <Dust dark={dark} animate={!reducedMotion} count={small ? 250 : 600} />
+      <Blob dark={dark} calm={reducedMotion} small={small} />
+      <Dust dark={dark} calm={reducedMotion} count={small ? 250 : 600} />
     </Canvas>
   )
 }
