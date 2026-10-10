@@ -266,7 +266,7 @@ export default function HeroScene({ dark, reducedMotion, paused, eventSource }) 
       // Track the pointer across the whole hero, not just over the canvas.
       eventSource={eventSource}
       eventPrefix="client"
-      camera={{ position: [0, 0, 6.2], fov: 45 }}
+      camera={{ position: [0, 0, 7], fov: 45 }}
       dpr={[1, 1.75]}
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       frameloop={paused ? 'never' : 'always'}
