@@ -29,8 +29,7 @@ export const experiences = [
   {
     title: 'Senior Frontend Developer',
     company: 'Summit Trade & Resources',
-    // Drop the company logo in public/logos/ and set its path here.
-    logo: '',
+    logo: '/logos/summit.png',
     date: 'Aug 2026 – Present',
     points: [
       'Leading frontend development of web products with Next.js, React and TypeScript.',

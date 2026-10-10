@@ -88,7 +88,7 @@ export default function Hero({ dark }) {
           {ready && (
             <Suspense fallback={null}>
               <div className="h-full w-full animate-[fadeIn_1.2s_ease_forwards] opacity-0">
-                <HeroScene dark={dark} reducedMotion={reducedMotion} paused={!visible} />
+                <HeroScene dark={dark} reducedMotion={reducedMotion} paused={!visible} eventSource={ref} />
               </div>
             </Suspense>
           )}
