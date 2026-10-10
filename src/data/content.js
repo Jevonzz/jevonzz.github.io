@@ -42,7 +42,7 @@ export const experiences = [
     title: 'Frontend Developer',
     company: 'SNSoft Sdn Bhd',
     logo: '/logos/snsoft.jpg',
-    date: 'Jan 2025 – Aug 2026',
+    date: 'Feb 2025 – Aug 2026',
     points: [
       'Built and maintained web and mobile apps with React, TypeScript and React Native.',
       'Integrated PostHog to track click and page-view events across the product.',
@@ -120,6 +120,15 @@ export const featuredProjects = [
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dexie', 'Recharts'],
     image: '/projects/pocketbook.png',
     links: [{ label: 'Live app', url: 'https://pocketbook-eight.vercel.app/' }],
+  },
+  {
+    name: 'Followback',
+    kind: 'Own product · PWA',
+    description:
+      "Shows who doesn't follow you back on Instagram, plus who unfollowed you, fans and mutuals. It reads the data export from Meta Accounts Center right in the browser, so there is no login and nothing is uploaded. Pro adds a follower history chart, unlocked with Lemon Squeezy license keys.",
+    tags: ['JavaScript', 'HTML', 'CSS', 'PWA', 'Lemon Squeezy'],
+    image: '/projects/followback.png',
+    links: [{ label: 'Live app', url: 'https://followback-seven.vercel.app/' }],
   },
   {
     name: 'YOOM',
