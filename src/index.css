@@ -200,8 +200,9 @@
     filter: none;
     transition: none;
   }
+  /* Slower, but still moving: a steady sideways drift is gentle enough. */
   .marquee-track {
-    animation: none;
+    animation: marquee 90s linear infinite !important;
   }
   *,
   *::before,
