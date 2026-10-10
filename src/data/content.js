@@ -7,7 +7,7 @@ export const profile = {
   company: { name: 'Summit Trade & Resources' },
   github: 'https://github.com/Jevonzz',
   // Add your LinkedIn profile URL and CV path to show those buttons.
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/voo-keat-vun-088649242/',
   resume: '',
 }
 
@@ -32,9 +32,11 @@ export const experiences = [
     logo: '/logos/summit.png',
     date: 'Aug 2026 – Present',
     points: [
-      'Leading frontend development of web products with Next.js, React and TypeScript.',
+      'Leading frontend development of a consumer web platform for the Vietnam market with Next.js, React and TypeScript.',
+      'Building responsive interfaces with a focus on speed and a polished user experience.',
+      'Working AI-first with Claude Code to plan, build, review and ship features faster.',
     ],
-    tags: ['Next.js', 'React', 'TypeScript'],
+    tags: ['Next.js', 'React', 'TypeScript', 'Claude Code'],
   },
   {
     title: 'Frontend Developer',
