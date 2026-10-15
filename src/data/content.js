@@ -113,13 +113,16 @@ export const featuredProjects = [
     links: [{ label: 'Live app', url: 'https://landing-page-builder-xi-weld.vercel.app/' }],
   },
   {
-    name: 'Pocketbook',
+    name: 'Wangku',
     kind: 'Own product · PWA',
     description:
-      'A personal money tracker you can install on your phone. It tracks income and expenses, shows a safe-to-spend amount with a 50/30/20 money plan, and charts spending by day and category. It works offline, with data kept on the device and CSV export and backup.',
+      'A simple money tracker for Malaysians that you install on your phone. It tracks income and expenses, shows how much you can safely spend today with a 50/30/20 money plan, and charts spending by day and category. It works offline with no sign-up, keeps data on the device with CSV export and backup, and comes in English, Bahasa Melayu and Chinese.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dexie', 'Recharts'],
-    image: '/projects/pocketbook.png',
-    links: [{ label: 'Live app', url: 'https://pocketbook-eight.vercel.app/' }],
+    image: '/projects/wangku.jpg',
+    links: [
+      { label: 'Live app', url: 'https://wangku-app.vercel.app/' },
+      { label: 'Landing page', url: 'https://wangku-home.vercel.app/' },
+    ],
   },
   {
     name: 'Followback',
