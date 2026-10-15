@@ -113,13 +113,16 @@ export const featuredProjects = [
     links: [{ label: 'Live app', url: 'https://landing-page-builder-xi-weld.vercel.app/' }],
   },
   {
-    name: 'Pocketbook',
+    name: 'Wangku',
     kind: 'Own product · PWA',
     description:
-      'A personal money tracker you can install on your phone. It tracks income and expenses, shows a safe-to-spend amount with a 50/30/20 money plan, and charts spending by day and category. It works offline, with data kept on the device and CSV export and backup.',
+      'A simple money tracker for Malaysians that you install on your phone. It tracks income and expenses, shows how much you can safely spend today with a 50/30/20 money plan, and charts spending by day and category. It works offline with no sign-up, keeps data on the device with CSV export and backup, and comes in English, Bahasa Melayu and Chinese.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dexie', 'Recharts'],
-    image: '/projects/pocketbook.png',
-    links: [{ label: 'Live app', url: 'https://pocketbook-eight.vercel.app/' }],
+    image: '/projects/wangku.jpg',
+    links: [
+      { label: 'Live app', url: 'https://wangku-app.vercel.app/' },
+      { label: 'Landing page', url: 'https://wangku-home.vercel.app/' },
+    ],
   },
   {
     name: 'Followback',
@@ -131,18 +134,27 @@ export const featuredProjects = [
     links: [{ label: 'Live app', url: 'https://followback-seven.vercel.app/' }],
   },
   {
-    name: 'YOOM',
-    kind: 'Video meetings',
+    name: 'Lift',
+    kind: 'Own product · PWA',
     description:
-      'A Zoom-style video meeting app, using Stream for real-time video and Clerk for authentication.',
-    tags: ['Next.js', 'TypeScript', 'Stream', 'Clerk'],
-    image: '',
-    links: [{ label: 'GitHub', url: 'https://github.com/Jevonzz/meeting-web-app' }],
-    hue: 'from-fuchsia-500/30 to-violet-500/30',
+      'A mobile-first gym tracker that works offline in the gym. Log sets with last session shown beside each one, start saved routines in one tap, and let the rest timer run after every set. It flags new personal records, charts weekly volume and estimated 1RM, and tracks bodyweight, calories and protein for a bulk.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dexie', 'Recharts'],
+    image: '/projects/lift.png',
+    links: [{ label: 'GitHub', url: 'https://github.com/Jevonzz/gym-tracker' }],
+  },
+  {
+    name: 'Service Landing Kit',
+    kind: 'Own product · Websites',
+    description:
+      'Fast, prerendered landing pages for Malaysian service businesses such as aircond, plumbing and pest control. Every client site is a folder of content and a colour ramp on top of shared React sections, in English or Bahasa Malaysia, with WhatsApp booking, local SEO and structured data built in.',
+    tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+    image: '/projects/service-landing-kit.png',
+    links: [],
   },
 ]
 
 export const learningProjects = [
+  { name: 'YOOM', tags: ['Next.js', 'Stream', 'Clerk'], link: 'https://github.com/Jevonzz/meeting-web-app' },
   { name: 'e-Commerce Store', tags: ['Payload CMS', 'Stripe'], link: 'https://github.com/Jevonzz/e-commerce' },
   { name: 'Car Service Maintenance', tags: ['React Native', 'Firebase'], link: 'https://github.com/Jevonzz/Car-Service-Maintenance' },
   { name: 'Apple iPhone Page', tags: ['React', 'GSAP', 'three.js'], link: 'https://github.com/Jevonzz/apple-web' },
