@@ -151,19 +151,10 @@ export const featuredProjects = [
     image: '/projects/service-landing-kit.png',
     links: [],
   },
-  {
-    name: 'YOOM',
-    kind: 'Video meetings',
-    description:
-      'A Zoom-style video meeting app, using Stream for real-time video and Clerk for authentication.',
-    tags: ['Next.js', 'TypeScript', 'Stream', 'Clerk'],
-    image: '',
-    links: [{ label: 'GitHub', url: 'https://github.com/Jevonzz/meeting-web-app' }],
-    hue: 'from-fuchsia-500/30 to-violet-500/30',
-  },
 ]
 
 export const learningProjects = [
+  { name: 'YOOM', tags: ['Next.js', 'Stream', 'Clerk'], link: 'https://github.com/Jevonzz/meeting-web-app' },
   { name: 'e-Commerce Store', tags: ['Payload CMS', 'Stripe'], link: 'https://github.com/Jevonzz/e-commerce' },
   { name: 'Car Service Maintenance', tags: ['React Native', 'Firebase'], link: 'https://github.com/Jevonzz/Car-Service-Maintenance' },
   { name: 'Apple iPhone Page', tags: ['React', 'GSAP', 'three.js'], link: 'https://github.com/Jevonzz/apple-web' },
