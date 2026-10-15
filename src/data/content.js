@@ -131,6 +131,24 @@ export const featuredProjects = [
     links: [{ label: 'Live app', url: 'https://followback-seven.vercel.app/' }],
   },
   {
+    name: 'Lift',
+    kind: 'Own product · PWA',
+    description:
+      'A mobile-first gym tracker that works offline in the gym. Log sets with last session shown beside each one, start saved routines in one tap, and let the rest timer run after every set. It flags new personal records, charts weekly volume and estimated 1RM, and tracks bodyweight, calories and protein for a bulk.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dexie', 'Recharts'],
+    image: '/projects/lift.png',
+    links: [{ label: 'GitHub', url: 'https://github.com/Jevonzz/gym-tracker' }],
+  },
+  {
+    name: 'Service Landing Kit',
+    kind: 'Own product · Websites',
+    description:
+      'Fast, prerendered landing pages for Malaysian service businesses such as aircond, plumbing and pest control. Every client site is a folder of content and a colour ramp on top of shared React sections, in English or Bahasa Malaysia, with WhatsApp booking, local SEO and structured data built in.',
+    tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+    image: '/projects/service-landing-kit.png',
+    links: [],
+  },
+  {
     name: 'YOOM',
     kind: 'Video meetings',
     description:
