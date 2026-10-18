@@ -12,7 +12,7 @@ export const profile = {
 }
 
 export const about = [
-  "I'm a senior frontend developer at Summit Trade & Resources, building web products with Next.js, React and TypeScript. On the side I build Baiki, my own workshop management app for Malaysian car and motorcycle workshops.",
+  "I'm a senior frontend developer at Summit Trade & Resources, building web products with Next.js, React and TypeScript. Outside work I build and ship my own products, like Baiki for Malaysian car and motorcycle workshops, Wangku for tracking your money and Lift for the gym.",
   "Before that I spent a year and a half at SNSoft building web and React Native mobile apps and setting up product analytics with PostHog. Earlier I optimised WordPress sites for SEO and built React and Tailwind apps with cross-functional teams. I care about interfaces that feel fast, look sharp and work for everyone.",
 ]
 

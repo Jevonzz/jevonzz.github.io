@@ -41,8 +41,8 @@ export default function About() {
           <dt className="font-mono text-xs uppercase tracking-[0.2em] text-muted">Building</dt>
           <dd className="relative mt-3 flex items-end justify-between gap-4">
             <span>
-              <span className="block font-display text-2xl font-semibold tracking-tight">Baiki</span>
-              <span className="mt-1 block text-muted">My own workshop management app</span>
+              <span className="block font-display text-2xl font-semibold tracking-tight">6 own products</span>
+              <span className="mt-1 block text-muted">Baiki, Wangku, Lift and more</span>
             </span>
             <ArrowUpRight className="h-6 w-6 shrink-0 text-muted transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent" />
           </dd>
