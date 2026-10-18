@@ -140,7 +140,10 @@ export const featuredProjects = [
       'A mobile-first gym tracker that works offline in the gym. Log sets with last session shown beside each one, start saved routines in one tap, and let the rest timer run after every set. It flags new personal records, charts weekly volume and estimated 1RM, and tracks bodyweight, calories and protein for a bulk.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dexie', 'Recharts'],
     image: '/projects/lift.png',
-    links: [{ label: 'GitHub', url: 'https://github.com/Jevonzz/gym-tracker' }],
+    links: [
+      { label: 'Live app', url: 'https://gym-tracker-chi-sooty.vercel.app/' },
+      { label: 'GitHub', url: 'https://github.com/Jevonzz/gym-tracker' },
+    ],
   },
   {
     name: 'Service Landing Kit',
@@ -149,7 +152,7 @@ export const featuredProjects = [
       'Fast, prerendered landing pages for Malaysian service businesses such as aircond, plumbing and pest control. Every client site is a folder of content and a colour ramp on top of shared React sections, in English or Bahasa Malaysia, with WhatsApp booking, local SEO and structured data built in.',
     tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
     image: '/projects/service-landing-kit.png',
-    links: [],
+    links: [{ label: 'Live demos', url: 'https://service-landing-kit.vercel.app/' }],
   },
 ]
 
