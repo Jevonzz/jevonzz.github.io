@@ -12,7 +12,7 @@ export const profile = {
 }
 
 export const about = [
-  "I'm a senior frontend developer at Summit Trade & Resources, building web products with Next.js, React and TypeScript. On the side I build Baiki, my own workshop management app for Malaysian car and motorcycle workshops.",
+  "I'm a senior frontend developer at Summit Trade & Resources, building web products with Next.js, React and TypeScript. Outside work I build and ship my own products, like Baiki for Malaysian car and motorcycle workshops, Wangku for tracking your money and Lift for the gym.",
   "Before that I spent a year and a half at SNSoft building web and React Native mobile apps and setting up product analytics with PostHog. Earlier I optimised WordPress sites for SEO and built React and Tailwind apps with cross-functional teams. I care about interfaces that feel fast, look sharp and work for everyone.",
 ]
 
@@ -140,7 +140,10 @@ export const featuredProjects = [
       'A mobile-first gym tracker that works offline in the gym. Log sets with last session shown beside each one, start saved routines in one tap, and let the rest timer run after every set. It flags new personal records, charts weekly volume and estimated 1RM, and tracks bodyweight, calories and protein for a bulk.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dexie', 'Recharts'],
     image: '/projects/lift.png',
-    links: [{ label: 'GitHub', url: 'https://github.com/Jevonzz/gym-tracker' }],
+    links: [
+      { label: 'Live app', url: 'https://gym-tracker-chi-sooty.vercel.app/' },
+      { label: 'GitHub', url: 'https://github.com/Jevonzz/gym-tracker' },
+    ],
   },
   {
     name: 'Service Landing Kit',
@@ -149,7 +152,7 @@ export const featuredProjects = [
       'Fast, prerendered landing pages for Malaysian service businesses such as aircond, plumbing and pest control. Every client site is a folder of content and a colour ramp on top of shared React sections, in English or Bahasa Malaysia, with WhatsApp booking, local SEO and structured data built in.',
     tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
     image: '/projects/service-landing-kit.png',
-    links: [],
+    links: [{ label: 'Live demos', url: 'https://service-landing-kit.vercel.app/' }],
   },
 ]
 
