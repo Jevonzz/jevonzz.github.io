@@ -8,7 +8,6 @@ export const profile = {
   github: 'https://github.com/Jevonzz',
   // Add your LinkedIn profile URL and CV path to show those buttons.
   linkedin: 'https://www.linkedin.com/in/voo-keat-vun-088649242/',
-  resume: '/cv.pdf',
 }
 
 export const about = [
